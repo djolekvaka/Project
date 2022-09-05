@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+    <!-- <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST"> -->
+
+    <!-- </form> -->
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+                <div>
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]"
+                        value="<%=campground.title%>" required> <br>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required
+                        value="<%=campground.location%>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Your vanity URL</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="image">https://source.com/</span>
+                        <input type="text" class="form-control" id="basic-url" name="campground[image]" required
+                            value="<%=campground.image%>">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input id="price" type="text" class="form-control" name="campground[price]" required
+                            value="<%=campground.price%>">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" name="campground[description]" id="description" cols="40" rows="5" required><%=campground.description%></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-success">Update Campground</button>
+                </div>
+
+            </form>
+            <div class="btn btn-info">
+                <a href="/campgrounds/<%=campground._id%>">Go back</a>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

@@ -1,0 +1,81 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-6 offset-3">
+            <!-- novalidate kazuje browseru da ne validira on, kako bi bootstrap preuzeo -->
+            <form action="/campgrounds" method="POST" novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Your vanity URL</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="image">https://source.com/</span>
+                        <input type="text" class="form-control" id="basic-url" name="campground[image]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                          </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input id="price" type="text" class="form-control" name="campground[price]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                          </div>
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" name="campground[description]" id="description" cols="40"
+                        rows="5" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-success">Submit</button>
+                </div>
+
+            </form>
+            <a href="/campgrounds">Back to Campgrounds</a>
+
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
